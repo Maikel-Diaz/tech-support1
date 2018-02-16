@@ -42,12 +42,21 @@ public class Responder
     {
         String respuesta = null;
         Iterator<String> iterator = input1.iterator();
-        String userInputString = iterator.next();
-        respuesta = respuestasInput.get(userInputString);
-        int numeroDeRespuestas = azar.nextInt(respuestas.size());
+        boolean searching = true;
+        while(iterator.hasNext() && searching) {
+             respuesta = respuestasInput.get(iterator.next());
+             if(respuesta != null) {
+                 searching = false;
+             }
+        }
+        for(String element : input1) {
+            if(respuesta == null) {
+                respuesta = respuestasInput.get(element);
+            }
+        }
         if(respuesta == null) {
             respuesta = respuestas.get(azar.nextInt(respuestas.size()));
         }
-        return respuestas.get(numeroDeRespuestas);
+        return respuesta;
     }
 }
